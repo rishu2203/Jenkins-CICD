@@ -55,13 +55,13 @@ pipeline {
             cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
 
             # Build image with Podman (note the '.' at the end)
-            podman build -t docker.io/${DOCKER_IMAGE} .
+            docker build -t docker.io/${DOCKER_IMAGE} .
         
             # Login to Docker Hub using Podman
-            echo "$DOCKER_PASS" | podman login docker.io -u "$DOCKER_USER" --password-stdin
+            echo "$DOCKER_PASS" | docker login docker.io -u "$DOCKER_USER" --password-stdin
         
         # Push image to Docker Hub
-            podman push docker.io/${DOCKER_IMAGE}
+            docker push docker.io/${DOCKER_IMAGE}
           '''
         }
       }
